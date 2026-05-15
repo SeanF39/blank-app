@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manifest Industries | Project Pipeline Command Dashboard</title>
+  <style>body{margin:0;font-family:Inter,system-ui;background:#07111f;color:#e5edf8}.wrap{padding:20px}.panel{border:1px solid #334155;border-radius:12px;background:#0b182b;padding:16px;margin-bottom:14px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.kpi{padding:14px;border:1px solid #334155;border-radius:12px;background:#0f1f36}.muted{color:#8fa2bd}.project{cursor:pointer}.badge{font-size:11px;padding:4px 8px;border:1px solid #475569;border-radius:999px}#detail{min-height:200px}@media(max-width:860px){.grid{grid-template-columns:1fr}}</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="panel"><h1>MANIFEST INDUSTRIES</h1><p class="muted">Project Pipeline Command Dashboard</p></div>
+  <div class="grid" id="kpis"></div>
+  <div class="panel"><h2>Project Pipeline</h2><div class="grid" id="projects"></div></div>
+  <div class="panel" id="detail"></div>
+</div>
+<script>
+const kpis=[['Active pipeline','05'],['Trust-gate average','62'],['Capability domains','07+']];
+const projects=[
+{title:'Critical One Energy',region:'Canada',material:'Antimony / strategic minerals',stage:'Fit / interest / capacity screen',note:'First candidate to test a technical-results packet and trust-gate model.'},
+{title:'Bosnia Industrial Lane',region:'Balkans',material:'Defense-industrial / bauxite-adjacent',stage:'Opportunity illuminated',note:'Potential allied industrial project lane requiring governance and technical packaging.'},
+{title:'SE Coastal Plains Deposits',region:'United States',material:'Heavy mineral sands / REE-bearing streams',stage:'Concept screen',note:'Domestic lane for land management and modular flowsheet evaluation.'}
+];
+const kpiEl=document.getElementById('kpis');
+const projEl=document.getElementById('projects');
+const detail=document.getElementById('detail');
+kpis.forEach(([l,v])=>{const d=document.createElement('div');d.className='kpi';d.innerHTML=`<div class='muted'>${l}</div><div style='font-size:28px;font-weight:800'>${v}</div>`;kpiEl.appendChild(d);});
+function renderDetail(p){detail.innerHTML=`<h2>${p.title}</h2><p class='muted'>${p.note}</p><p><span class='badge'>${p.region}</span> <span class='badge'>${p.material}</span> <span class='badge'>${p.stage}</span></p>`}
+projects.forEach((p)=>{const c=document.createElement('div');c.className='kpi project';c.innerHTML=`<h3>${p.title}</h3><p class='muted'>${p.region}<br/>${p.material}<br/>${p.stage}</p>`;c.onclick=()=>renderDetail(p);projEl.appendChild(c);});
+renderDetail(projects[0]);
+</script>
+</body>
+</html>
